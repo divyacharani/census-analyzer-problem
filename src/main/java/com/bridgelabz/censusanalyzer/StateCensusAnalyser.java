@@ -36,7 +36,7 @@ public class StateCensusAnalyser {
 			return noOfEntries;
 		} catch (Exception e) {
 			throw new CensusAnalyserException(e.getMessage(),
-					CensusAnalyserException.ExceptionType.CENSUS_FILE_EXCEPTION);
+					CensusAnalyserException.ExceptionType.INCORRECT_FILE_OR_FILE_TYPE);
 		}
 	}
 
