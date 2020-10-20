@@ -9,6 +9,7 @@ public class StateCensusAnalyserTest {
 	private static String FILE_PATH = "C:\\Users\\DELL\\eclipse-workspace\\CensusAnalyzer\\src\\main\\resources\\IndianStateCensusData.csv";
 	private static String WRONG_FILE_PATH = "C:\\Users\\DELL\\CensusAnalyzer\\src\\main\\resources\\IndianStateCensusData.csv";
 	private static String WRONG_FILE_TYPE = "C:\\\\Users\\\\DELL\\\\eclipse-workspace\\\\CensusAnalyzer\\\\src\\\\main\\\\resources\\\\IndianStateCensusData.txt";
+	private static String WRONG_DELIMITER = "C:\\Users\\DELL\\eclipse-workspace\\CensusAnalyzer\\src\\main\\resources\\IndianStateCensusDataDelimiter.csv";
 
 	// To test number of entries
 	@Test
@@ -42,6 +43,17 @@ public class StateCensusAnalyserTest {
 			stateCensusAnalyser.readData(WRONG_FILE_TYPE);
 		} catch (CensusAnalyserException e) {
 			assertEquals(CensusAnalyserException.ExceptionType.INCORRECT_FILE_OR_FILE_TYPE, e.type);
+		}
+	}
+
+	// To test incorrect delimiter
+	@Test
+	public void givenWrongDelimiterShouldThrowException() {
+		StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
+		try {
+			stateCensusAnalyser.readData(WRONG_DELIMITER);
+		} catch (CensusAnalyserException e) {
+			assertEquals(CensusAnalyserException.ExceptionType.INCORRECT_DELIMITER_OR_HEADER, e.type);
 		}
 	}
 

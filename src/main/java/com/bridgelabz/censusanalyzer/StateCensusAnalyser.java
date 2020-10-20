@@ -21,8 +21,14 @@ public class StateCensusAnalyser {
 
 	// To read data from csv file
 	public int readData(String filePath) throws CensusAnalyserException {
+		Reader reader = null;
 		try {
-			Reader reader = Files.newBufferedReader(Paths.get(filePath));
+			reader = Files.newBufferedReader(Paths.get(filePath));
+		} catch (Exception e) {
+			throw new CensusAnalyserException(e.getMessage(),
+					CensusAnalyserException.ExceptionType.INCORRECT_FILE_OR_FILE_TYPE);
+		}
+		try {
 			CsvToBeanBuilder<CsvStateCensus> csvToBeanBuilder = new CsvToBeanBuilder<>(reader);
 			csvToBeanBuilder.withType(CsvStateCensus.class);
 			csvToBeanBuilder.withIgnoreLeadingWhiteSpace(true);
@@ -36,7 +42,7 @@ public class StateCensusAnalyser {
 			return noOfEntries;
 		} catch (Exception e) {
 			throw new CensusAnalyserException(e.getMessage(),
-					CensusAnalyserException.ExceptionType.INCORRECT_FILE_OR_FILE_TYPE);
+					CensusAnalyserException.ExceptionType.INCORRECT_DELIMITER_OR_HEADER);
 		}
 	}
 
