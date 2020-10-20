@@ -8,8 +8,9 @@ public class StateCensusAnalyserTest {
 
 	private static String FILE_PATH = "C:\\Users\\DELL\\eclipse-workspace\\CensusAnalyzer\\src\\main\\resources\\IndianStateCensusData.csv";
 	private static String WRONG_FILE_PATH = "C:\\Users\\DELL\\CensusAnalyzer\\src\\main\\resources\\IndianStateCensusData.csv";
-	private static String WRONG_FILE_TYPE = "C:\\\\Users\\\\DELL\\\\eclipse-workspace\\\\CensusAnalyzer\\\\src\\\\main\\\\resources\\\\IndianStateCensusData.txt";
+	private static String WRONG_FILE_TYPE = "C:\\Users\\DELL\\eclipse-workspace\\CensusAnalyzer\\src\\main\\resources\\IndianStateCensusData.txt";
 	private static String WRONG_DELIMITER = "C:\\Users\\DELL\\eclipse-workspace\\CensusAnalyzer\\src\\main\\resources\\IndianStateCensusDataDelimiter.csv";
+	private static String WRONG_HEADER = "C:\\Users\\DELL\\eclipse-workspace\\CensusAnalyzer\\src\\main\\resources\\IndianStateCensusDataHeader.csv";
 
 	// To test number of entries
 	@Test
@@ -52,6 +53,17 @@ public class StateCensusAnalyserTest {
 		StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
 		try {
 			stateCensusAnalyser.readData(WRONG_DELIMITER);
+		} catch (CensusAnalyserException e) {
+			assertEquals(CensusAnalyserException.ExceptionType.INCORRECT_DELIMITER_OR_HEADER, e.type);
+		}
+	}
+
+	// To test incorrect header
+	@Test
+	public void givenWrongHeaderShouldThrowException() {
+		StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
+		try {
+			stateCensusAnalyser.readData(WRONG_HEADER);
 		} catch (CensusAnalyserException e) {
 			assertEquals(CensusAnalyserException.ExceptionType.INCORRECT_DELIMITER_OR_HEADER, e.type);
 		}
