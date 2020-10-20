@@ -15,6 +15,7 @@ public class StateCensusAnalyserTest {
 
 	// State codes data
 	private static String FILE_PATH_STATES = "C:\\Users\\DELL\\eclipse-workspace\\CensusAnalyzer\\src\\main\\resources\\IndiaStateCodes.csv";
+	private static String WRONG_FILE_PATH_STATES = "C:\\Users\\DELL\\src\\main\\resources\\IndiaStateCodes.csv";
 
 	// To test number of entries
 	@Test
@@ -84,6 +85,17 @@ public class StateCensusAnalyserTest {
 			e.printStackTrace();
 		}
 		assertEquals(29, noOfEntires);
+	}
+
+	// To test wrong file
+	@Test
+	public void givenStateCodeWrongFileShouldThrowException() {
+		StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
+		try {
+			stateCensusAnalyser.readStateCodeData(WRONG_FILE_PATH_STATES);
+		} catch (CensusAnalyserException e) {
+			assertEquals(CensusAnalyserException.ExceptionType.INCORRECT_FILE_OR_FILE_TYPE, e.type);
+		}
 	}
 
 }
